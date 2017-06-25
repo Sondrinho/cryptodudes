@@ -18,6 +18,8 @@ public class App implements CommandLineRunner {
         SpringApplication.run(App.class);
     }
 
+    
+    // Sondre is a bad bad boy
     @Override
     public void run(String... strings) throws Exception {
     	log.info("Currencyinformation will update every 30sec.");
