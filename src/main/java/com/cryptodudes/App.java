@@ -19,7 +19,7 @@ public class App implements CommandLineRunner {
     }
 
     
-    // Sondre is a bad bad boy
+    // Sondre is a bad bad boyfdsfs
     @Override
     public void run(String... strings) throws Exception {
     	log.info("Currencyinformation will update every 30sec.");
