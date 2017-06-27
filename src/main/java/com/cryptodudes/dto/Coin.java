@@ -12,6 +12,7 @@ public class Coin {
 	public String name;
 	public String symbol;
 	public String rank;
+	public String volume_usd;
 	public String price_usd;
 	public String price_btc;
 	public String market_cap_usd;
@@ -19,6 +20,7 @@ public class Coin {
 	public String total_supply;
 	public String percent_change_1h;
 	public String percent_change_24h;
+	public String percent_change_7d;
 	public String last_updated;
 
     public Coin( 
@@ -26,6 +28,7 @@ public class Coin {
 		@JsonProperty("name") final String name,
 		@JsonProperty("symbol") final String symbol,
 		@JsonProperty("rank") final String rank,
+		@JsonProperty("24h_volume_usd") final String volume_usd,
 		@JsonProperty("price_usd") final String price_usd,
 		@JsonProperty("price_btc") final String price_btc,
 		@JsonProperty("market_cap_usd") final String market_cap_usd,
@@ -33,12 +36,14 @@ public class Coin {
 		@JsonProperty("total_supply") final String total_supply,
 		@JsonProperty("percent_change_1h") final String percent_change_1h,
 		@JsonProperty("percent_change_24h") final String percent_change_24h,
+		@JsonProperty("percent_change_7d") final String percent_change_7d,
 		@JsonProperty("last_updated") final String last_updated) {
     	
 		this.id = id;
 		this.name =name;
 		this.symbol = symbol;
 		this.rank = rank;
+		this.volume_usd = volume_usd;
 		this.price_usd =price_usd;
 		this.price_btc = price_btc;
 		this.market_cap_usd = market_cap_usd;
@@ -46,6 +51,7 @@ public class Coin {
 		this.total_supply = total_supply;
 		this.percent_change_1h = percent_change_1h;
 		this.percent_change_24h = percent_change_24h;
+		this.percent_change_7d = percent_change_7d;
 		this.last_updated = last_updated;
     }
 
@@ -93,6 +99,16 @@ public class Coin {
 		this.rank = rank;
 	}
 
+
+	public String getvolume_usd() {
+		return volume_usd;
+	}
+
+
+
+	public void setvolume_usd(String volume_usd) {
+		this.volume_usd = volume_usd;
+	}
 
 
 	public String getPrice_usd() {
@@ -177,6 +193,16 @@ public class Coin {
 		this.percent_change_24h = percent_change_24h;
 	}
 
+	public String getPercent_change_7d() {
+		return percent_change_7d;
+	}
+
+
+
+	public void setPercent_change_7d(String percent_change_7d) {
+		this.percent_change_7d = percent_change_7d;
+	}
+
 
 
 	public String getLast_updated() {
@@ -198,6 +224,7 @@ public class Coin {
                 ", name=" + name +
                 ", symbol=" + symbol +
                 ", rank=" + rank +
+                 ", volume_usd=" + volume_usd +
                 ", price_usd=" + price_usd +
                 ", price_btc=" + price_btc +
                 ", market_cap_usd=" + market_cap_usd +
@@ -205,6 +232,7 @@ public class Coin {
                 ", total_supply=" + total_supply +
                 ", percent_change_1h=" + percent_change_1h +
                 ", percent_change_24h=" + percent_change_24h +
+                ", percent_change_24h=" + percent_change_7d +
                 ", last_updated=" + last_updated +
                 '}';
     }
