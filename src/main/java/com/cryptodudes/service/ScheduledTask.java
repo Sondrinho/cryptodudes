@@ -37,48 +37,56 @@ public class ScheduledTask {
 		//Coin[] coins = objectMapper.readValue(results.getBody(), Coin[].class);
 		//System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(coins));
 		Coin[] result = restTemplate.getForObject("https://api.coinmarketcap.com/v1/ticker/?limit=5", Coin[].class);
-		String id= result[0].id;
-		String name= result[0].name;
-		String symbol= result[0].symbol;
-		String rank= result[0].rank;
-		String price_usd= result[0].price_usd;
-		String price_btc= result[0].price_btc;
-		String volume_usd= result[0].volume_usd;
-		String market_cap_usd= result[0].market_cap_usd;
-		String available_supply= result[0].available_supply;
-		String total_supply= result[0].total_supply;
-		String percent_change_oneh= result[0].percent_change_1h;
-		String percent_change_h= result[0].percent_change_24h;
-		String percent_change_d= result[0].percent_change_7d;
-		Long last_updated = result[0].last_updated;
 		
-		
-		final DateTimeFormatter lastUpdatedDate = 
-			  DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	
+		int i;
+		for (i=0; i < result.length ; i++) {
+			String id=result[i].id;
+			String name= result[i].name;
+			String symbol= result[i].symbol;
+			String rank= result[i].rank;
+			String price_usd= result[i].price_usd;
+			String price_btc= result[i].price_btc;
+			String volume_usd= result[i].volume_usd;
+			String market_cap_usd= result[i].market_cap_usd;
+			String available_supply= result[i].available_supply;
+			String total_supply= result[i].total_supply;
+			String percent_change_oneh= result[i].percent_change_1h;
+			String percent_change_h= result[i].percent_change_24h;
+			String percent_change_d= result[i].percent_change_7d;
+			Long last_updated = result[i].last_updated;
 
-			final String formattedDtm = Instant.ofEpochSecond(last_updated)
-			        .atZone(ZoneId.of("GMT+1"))
-			        .format(lastUpdatedDate);
+			DateTimeFormatter lastUpdatedDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			String formattedDtm = Instant.ofEpochSecond(last_updated).atZone(ZoneId.of("GMT+1")).format(lastUpdatedDate);
+			DbConnection con = new DbConnection();
+			
+			preparedStatement = con.Connection().prepareStatement("insert into crypto.coin_info values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+	        preparedStatement.setString(1, id);
+	        preparedStatement.setString(2, name);
+	        preparedStatement.setString(3, symbol);
+	        preparedStatement.setString(4, rank);
+	        preparedStatement.setString(5, price_usd);
+	        preparedStatement.setString(6, price_btc);
+	        preparedStatement.setString(7, volume_usd);
+	        preparedStatement.setString(8, market_cap_usd);
+	        preparedStatement.setString(9, available_supply);
+	        preparedStatement.setString(10, total_supply);
+	        preparedStatement.setString(11,percent_change_oneh);
+	        preparedStatement.setString(12,percent_change_h);
+	        preparedStatement.setString(13, percent_change_d);
+	        preparedStatement.setString(14, formattedDtm);
+	        preparedStatement.executeUpdate();
+	        formattedDtm = null;
+	        
+	      
+
+		}
 
 		
-		DbConnection con = new DbConnection();
 		
-		preparedStatement = con.Connection().prepareStatement("insert into crypto.coin_info values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        preparedStatement.setString(1, id);
-        preparedStatement.setString(2, name);
-        preparedStatement.setString(3, symbol);
-        preparedStatement.setString(4, rank);
-        preparedStatement.setString(5, price_usd);
-        preparedStatement.setString(6, price_btc);
-        preparedStatement.setString(7, volume_usd);
-        preparedStatement.setString(8, market_cap_usd);
-        preparedStatement.setString(9, available_supply);
-        preparedStatement.setString(10, total_supply);
-        preparedStatement.setString(11,percent_change_oneh);
-        preparedStatement.setString(12,percent_change_h);
-        preparedStatement.setString(13, percent_change_d);
-        preparedStatement.setString(14, formattedDtm);
-        preparedStatement.executeUpdate();
+
+		
+		
 
 	}
 }
