@@ -1,9 +1,15 @@
 package com.cryptodudes.service;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -23,7 +29,7 @@ public class ScheduledTask {
 	@Autowired
 	ObjectMapper objectMapper;
 
-	@Scheduled(fixedRate = 30000)  // every 30 seconds
+	@Scheduled(fixedRate = 60000)  // every 30 seconds
 	public void pullCryptoInfo() throws Exception {
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -44,7 +50,16 @@ public class ScheduledTask {
 		String percent_change_oneh= result[0].percent_change_1h;
 		String percent_change_h= result[0].percent_change_24h;
 		String percent_change_d= result[0].percent_change_7d;
-		String last_updated= result[0].last_updated;
+		Long last_updated = result[0].last_updated;
+		
+		
+		final DateTimeFormatter lastUpdatedDate = 
+			  DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+			final String formattedDtm = Instant.ofEpochSecond(last_updated)
+			        .atZone(ZoneId.of("GMT+1"))
+			        .format(lastUpdatedDate);
+
 		
 		DbConnection con = new DbConnection();
 		
@@ -62,7 +77,7 @@ public class ScheduledTask {
         preparedStatement.setString(11,percent_change_oneh);
         preparedStatement.setString(12,percent_change_h);
         preparedStatement.setString(13, percent_change_d);
-        preparedStatement.setString(14, last_updated);
+        preparedStatement.setString(14, formattedDtm);
         preparedStatement.executeUpdate();
 
 	}

@@ -1,5 +1,8 @@
 package com.cryptodudes.dto;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -21,7 +24,7 @@ public class Coin {
 	public String percent_change_1h;
 	public String percent_change_24h;
 	public String percent_change_7d;
-	public String last_updated;
+	public Long last_updated;
 
     public Coin( 
     	@JsonProperty("id") final String id,
@@ -37,7 +40,7 @@ public class Coin {
 		@JsonProperty("percent_change_1h") final String percent_change_1h,
 		@JsonProperty("percent_change_24h") final String percent_change_24h,
 		@JsonProperty("percent_change_7d") final String percent_change_7d,
-		@JsonProperty("last_updated") final String last_updated) {
+		@JsonProperty("last_updated") final Long last_updated) {
     	
 		this.id = id;
 		this.name =name;
@@ -205,13 +208,13 @@ public class Coin {
 
 
 
-	public String getLast_updated() {
+	public Long getLast_updated() {
 		return last_updated;
 	}
 
 
 
-	public void setLast_updated(String last_updated) {
+	public void setLast_updated(Long last_updated) {
 		this.last_updated = last_updated;
 	}
 
