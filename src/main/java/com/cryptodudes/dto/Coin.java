@@ -11,11 +11,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Coin {
 
-	public Integer id;
+	public String id;
 	public String name;
 	public String symbol;
 	public String rank;
-	public Integer volume_usd;
+	public Double volume_usd;
 	public Double price_usd;
 	public Double price_btc;
 	public String market_cap_usd;
@@ -27,11 +27,11 @@ public class Coin {
 	public Long last_updated;
 
     public Coin( 
-    	@JsonProperty("id") final Integer id,
+    	@JsonProperty("id") final String id,
 		@JsonProperty("name") final String name,
 		@JsonProperty("symbol") final String symbol,
 		@JsonProperty("rank") final String rank,
-		@JsonProperty("24h_volume_usd") final Integer volume_usd,
+		@JsonProperty("24h_volume_usd") final Double volume_usd,
 		@JsonProperty("price_usd") final Double price_usd,
 		@JsonProperty("price_btc") final Double price_btc,
 		@JsonProperty("market_cap_usd") final String market_cap_usd,
@@ -59,11 +59,11 @@ public class Coin {
     }
 
     
-    public Integer getId() {
+    public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -103,13 +103,13 @@ public class Coin {
 	}
 
 
-	public Integer getvolume_usd() {
+	public Double getvolume_usd() {
 		return volume_usd;
 	}
 
 
 
-	public void setvolume_usd(Integer volume_usd) {
+	public void setvolume_usd(Double volume_usd) {
 		this.volume_usd = volume_usd;
 	}
 

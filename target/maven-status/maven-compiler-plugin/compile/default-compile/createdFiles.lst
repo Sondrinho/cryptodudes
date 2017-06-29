@@ -1,3 +1,4 @@
 com\cryptodudes\dto\Coin.class
 com\cryptodudes\service\ScheduledTask.class
 com\cryptodudes\App.class
+com\cryptodudes\util\DbConnection.class

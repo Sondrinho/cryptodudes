@@ -29,7 +29,7 @@ public class ScheduledTask {
 	@Autowired
 	ObjectMapper objectMapper;
 
-	@Scheduled(fixedRate = 60000)  // every 30 seconds
+	@Scheduled(fixedRate = 200000)  // every 30 seconds
 	public void pullCryptoInfo() throws Exception {
 
 		RestTemplate restTemplate = new RestTemplate();
@@ -41,13 +41,13 @@ public class ScheduledTask {
 	
 		int i;
 		for (i=0; i < result.length ; i++) {
-			Integer id=result[i].id;
+			String id=result[i].id;
 			String name= result[i].name;
 			String symbol= result[i].symbol;
 			String rank= result[i].rank;
 			Double price_usd= result[i].price_usd;
 			Double price_btc= result[i].price_btc;
-			Integer volume_usd= result[i].volume_usd;
+			Double volume_usd= result[i].volume_usd;
 			String market_cap_usd= result[i].market_cap_usd;
 			String available_supply= result[i].available_supply;
 			String total_supply= result[i].total_supply;
@@ -61,13 +61,14 @@ public class ScheduledTask {
 			DbConnection con = new DbConnection();
 			
 			preparedStatement = con.Connection().prepareStatement("insert into crypto.coin_info values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-	        preparedStatement.setInt(1, id);
+	        preparedStatement.setString(1, id);
 	        preparedStatement.setString(2, name);
 	        preparedStatement.setString(3, symbol);
-	        preparedStatement.setString(4, rank);
-	        preparedStatement.setDouble(5, price_usd);
-	        preparedStatement.setDouble(6, price_btc);
-	        preparedStatement.setInt(7, volume_usd);
+	       // preparedStatement.setString(4, rank);
+	        preparedStatement.setDouble(4, price_usd);
+	        preparedStatement.setDouble(5, price_btc);
+	        preparedStatement.setDouble(6, volume_usd);
+	        preparedStatement.setString(7, rank);
 	        preparedStatement.setString(8, market_cap_usd);
 	        preparedStatement.setString(9, available_supply);
 	        preparedStatement.setString(10, total_supply);
