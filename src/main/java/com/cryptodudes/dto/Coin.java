@@ -11,13 +11,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Coin {
 
-	public String id;
+	public Integer id;
 	public String name;
 	public String symbol;
 	public String rank;
-	public String volume_usd;
-	public String price_usd;
-	public String price_btc;
+	public Integer volume_usd;
+	public Double price_usd;
+	public Double price_btc;
 	public String market_cap_usd;
 	public String available_supply;
 	public String total_supply;
@@ -27,13 +27,13 @@ public class Coin {
 	public Long last_updated;
 
     public Coin( 
-    	@JsonProperty("id") final String id,
+    	@JsonProperty("id") final Integer id,
 		@JsonProperty("name") final String name,
 		@JsonProperty("symbol") final String symbol,
 		@JsonProperty("rank") final String rank,
-		@JsonProperty("24h_volume_usd") final String volume_usd,
-		@JsonProperty("price_usd") final String price_usd,
-		@JsonProperty("price_btc") final String price_btc,
+		@JsonProperty("24h_volume_usd") final Integer volume_usd,
+		@JsonProperty("price_usd") final Double price_usd,
+		@JsonProperty("price_btc") final Double price_btc,
 		@JsonProperty("market_cap_usd") final String market_cap_usd,
 		@JsonProperty("available_supply") final String available_supply,
 		@JsonProperty("total_supply") final String total_supply,
@@ -59,11 +59,11 @@ public class Coin {
     }
 
     
-    public String getId() {
+    public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -103,36 +103,36 @@ public class Coin {
 	}
 
 
-	public String getvolume_usd() {
+	public Integer getvolume_usd() {
 		return volume_usd;
 	}
 
 
 
-	public void setvolume_usd(String volume_usd) {
+	public void setvolume_usd(Integer volume_usd) {
 		this.volume_usd = volume_usd;
 	}
 
 
-	public String getPrice_usd() {
+	public Double getPrice_usd() {
 		return price_usd;
 	}
 
 
 
-	public void setPrice_usd(String price_usd) {
+	public void setPrice_usd(Double price_usd) {
 		this.price_usd = price_usd;
 	}
 
 
 
-	public String getPrice_btc() {
+	public Double getPrice_btc() {
 		return price_btc;
 	}
 
 
 
-	public void setPrice_btc(String price_btc) {
+	public void setPrice_btc(Double price_btc) {
 		this.price_btc = price_btc;
 	}
 
